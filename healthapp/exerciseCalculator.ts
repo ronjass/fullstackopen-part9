@@ -8,6 +8,25 @@ interface Results {
   average: number;
 }
 
+const argumentParser = (
+  args: string[]
+): { target: number; values: number[] } => {
+  if (args.length < 4) throw new Error("Not enough arguments");
+  if (args.length > 50) throw new Error("Too many arguments");
+
+  const target = Number(args[2]);
+  const values = args.slice(3).map(Number);
+
+  if (isNaN(target) || !values.every((value) => !isNaN(value))) {
+    throw new Error("Provided values were not numbers!");
+  }
+
+  return {
+    target,
+    values,
+  };
+};
+
 const calculateExercises = (values: number[], targetValue: number): Results => {
   let sum = 0;
   values.forEach((value) => {
@@ -40,4 +59,13 @@ const calculateExercises = (values: number[], targetValue: number): Results => {
   };
 };
 
-console.log(calculateExercises([3, 0, 2, 4.5, 0, 3, 1], 2));
+try {
+  const { target, values } = argumentParser(process.argv);
+  console.log(calculateExercises(values, target));
+} catch (error: unknown) {
+  let errorMessage = "Something went wrong: ";
+  if (error instanceof Error) {
+    errorMessage += error.message;
+  }
+  console.log(errorMessage);
+}
