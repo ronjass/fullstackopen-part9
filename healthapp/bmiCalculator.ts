@@ -19,16 +19,19 @@ const parseArguments = (args: string[]): Values => {
   }
 };
 
-const calculateBmi = (height: number, weight: number): void => {
+export function calculateBmi(height: number, weight: number): String {
   let bmi = weight / (height / 100) ** 2;
-  if (bmi < 18.5) console.log("Underweight");
-  else if (bmi >= 18.5 && bmi < 25.0) console.log("Normal range");
-  else if (bmi >= 25.0) console.log("Overweight");
-};
+  if (bmi < 18.5) return "Underweight";
+  else if (bmi >= 18.5 && bmi < 25.0) return "Normal range";
+  else if (bmi >= 25.0) return "Overweight";
+  return "Invalid BMI"; // Added return statement for completeness
+}
 
 try {
-  const { height, weight } = parseArguments(process.argv);
-  calculateBmi(height, weight);
+  if (process.argv[1] === import.meta.filename) {
+    const { height, weight } = parseArguments(process.argv);
+    console.log(calculateBmi(height, weight));
+  }
 } catch (error: unknown) {
   let errorMessage = "Something went wrong: ";
   if (error instanceof Error) {
