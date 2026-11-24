@@ -1,4 +1,4 @@
-import express from "express";
+import express, { Request, Response } from "express";
 import { calculateBmi } from "./bmiCalculator.ts";
 
 const app = express();
@@ -7,7 +7,7 @@ app.get("/hello", (_req, res) => {
   res.send("Hello Full Stack!");
 });
 
-app.get("/bmi", (req: any, res: any) => {
+app.get("/bmi", (req: Request, res: Response) => {
   const height = Number(req.query.height);
   const weight = Number(req.query.weight);
 

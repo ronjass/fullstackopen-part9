@@ -33,20 +33,25 @@ const calculateExercises = (values: number[], targetValue: number): Results => {
     sum += value;
   });
 
-  let length = values.length;
+  const length = values.length;
 
-  let days = values.filter((value) => value !== 0).length;
+  const days = values.filter((value) => value !== 0).length;
 
-  let avg = sum / length;
+  const avg = sum / length;
 
   let ratingValue = 1;
   let description = "bad";
   let targetSuccess = false;
 
-  if (avg >= targetValue)
-    (ratingValue = 3), (description = "very good"), (targetSuccess = true);
-  if (avg < targetValue && avg >= targetValue * 0.75)
-    (ratingValue = 2), (description = "not too bad but could be better");
+  if (avg >= targetValue) {
+    ratingValue = 3;
+    description = "very good";
+    targetSuccess = true;
+  }
+  if (avg < targetValue && avg >= targetValue * 0.75) {
+    ratingValue = 2;
+    description = "not too bad but could be better";
+  }
 
   return {
     periodLength: length,
