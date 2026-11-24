@@ -27,7 +27,10 @@ const argumentParser = (
   };
 };
 
-const calculateExercises = (values: number[], targetValue: number): Results => {
+export const calculateExercises = (
+  values: number[],
+  targetValue: number
+): Results => {
   let sum = 0;
   values.forEach((value) => {
     sum += value;
