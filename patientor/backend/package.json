@@ -8,8 +8,8 @@
   "main": "index.js",
   "scripts": {
     "tsc": "tsc",
-    "start": "tsx index.ts",
-    "dev": "concurrently \"tsx --watch index.ts\"",
+    "start": "tsx src/index.ts",
+    "dev": "concurrently \"tsx --watch src/index.ts\"",
     "lint": "eslint ."
   },
   "devDependencies": {
